@@ -7,46 +7,45 @@ import time
 # Example: Create a zeros vector of size 10 and store variable tmp.
 # Python
 pythonStartTime = time.time()
-tmp_1 = [0 for i in range(10)]
-pythonEndTime = time.time()
+# tmp_1 = [0 for i in range(10)]
+
 
 # NumPy
 numPyStartTime = time.time()
-tmp_2 = np.zeros(10)
-numPyEndTime = time.time()
-print('Python time: {0} sec.'.format(pythonEndTime-pythonStartTime))
-print('NumPy time: {0} sec.'.format(numPyEndTime-numPyStartTime))
+# tmp_2 = np.zeros(10)
 
 
+'''
 z_1 = None
 z_2 = None
 ################################################################
 # 1. Create a zeros array of size (3,5) and store in variable z.
 # Python
-
+z_1 = [[0]*5]*3
 # NumPy
-
+z_2 = np.zeros((3, 5), dtype= np.int)
 
 #################################################
 # 2. Set all the elements in first row of z to 7.
 # Python
-
+z_1[0] = [7]*len(z_1[0])
 # NumPy
-
+z_2[:1,] = [7, 7, 7, 7, 7]
 
 #####################################################
 # 3. Set all the elements in second column of z to 9.
 # Python
-
+for i in range(len(z_1)):
+    z_1[i][1] = 9
 # NumPy
-
+z_2[:,1:2] = 9
 
 #############################################################
 # 4. Set the element at (second row, third column) of z to 5.
 # Python
-
+z_1[1][2] = 5
 # NumPy
-
+z_2[1, 2] = 5
 
 ##############
 print(z_1)
@@ -59,15 +58,17 @@ x_2 = None
 ##########################################################################################
 # 5. Create a vector of size 50 with values ranging from 50 to 99 and store in variable x.
 # Python
-
+x_1 = []
+for i in range(50, 100):
+    x_1.append(i);
 # NumPy
-
+x_2 = np.arange(50, 100)
 
 ##############
 print(x_1)
 print(x_2)
 ##############
-
+'''
 
 y_1 = None
 y_2 = None
@@ -76,14 +77,18 @@ y_2 = None
 # Python
 
 # NumPy
-
+y_2 = np.arange(16).reshape(4,4)
 
 ##############
 print(y_1)
 print(y_2)
+pythonEndTime = time.time()
+numPyEndTime = time.time()
+print('Python time: {0} sec.'.format(pythonEndTime-pythonStartTime))
+print('NumPy  time: {0} sec.'.format(numPyEndTime-numPyStartTime))
 ##############
 
-
+'''
 tmp_1 = None
 tmp_2 = None
 ####################################################################################
@@ -174,3 +179,4 @@ print (np.sum(e_1 == e_2))
 # Python
 
 # NumPy
+'''
