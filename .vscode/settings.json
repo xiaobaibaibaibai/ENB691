@@ -43,5 +43,12 @@
         "haskell": "runhaskell",
         "nim": "nim compile --verbosity:0 --hints:off --run",
         "lisp": "sbcl --script"
+    },
+    "files.exclude": {
+        "**/.git": false,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true
     }
 }
