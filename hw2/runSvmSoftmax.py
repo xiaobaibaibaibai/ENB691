@@ -131,14 +131,18 @@ print ('\nFinding best model for Svm classifier')
 # - Store the best model in bestSoftmax                                        #
 # - Store the best accuracy in bestAcc                                         #
 ################################################################################
+learningRate = [1e-7, 4e-7, 8e-7]
+regularizationStrength = [1000, 10000, 50000]
 
-
-
-
-
-
-
-
+for lr in learningRate:
+    for reg in regularizationStrength:
+        classifier = Svm(xTrain.shape[1], numClasses)
+        classifier.train(xTrain, yTrain, lr, reg, iter=1500 ,verbose=False)
+        currentAcc = classifier.calAccuracy(xVal, yVal)
+        if currentAcc > bestAcc:
+            bestAcc = currentAcc
+            bestModel = classifier
+        bestParameters = [lr,reg]
 
 
 
@@ -220,13 +224,18 @@ print ('\nFinding best model for Softmax classifier')
 # - Store the best model in bestSoftmax                                        #
 # - Store the best accuracy in bestAcc                                         #
 ################################################################################
+learningRate = [1e-7, 4e-7, 8e-7]
+regularizationStrength = [1000, 10000, 50000]
 
-
-
-
-
-
-
+for lr in learningRate:
+    for reg in regularizationStrength:
+        classifier = Softmax(xTrain.shape[1], numClasses)
+        classifier.train(xTrain, yTrain, lr, reg, iter=1500 ,verbose=False)
+        currentAcc = classifier.calAccuracy(xVal, yVal)
+        if currentAcc > bestAcc:
+            bestAcc = currentAcc
+            bestModel = classifier
+        bestParameters = [lr,reg]
 
 
 pass

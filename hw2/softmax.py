@@ -11,7 +11,7 @@ class Softmax (object):
         # - Generate a random softmax weight matrix to use to compute loss.     #
         #   with standard normal distribution and Standard deviation = 0.01.    #
         #########################################################################
-
+        self.W = np.random.randn(inputDim, outputDim) * 0.01
 
         pass
         #########################################################################
@@ -44,13 +44,19 @@ class Softmax (object):
         # Bonus:                                                                    #
         # - +2 points if done without loop                                          #
         #############################################################################
+        N = x.shape[0]
+        s = x.dot(self.W)
+        s = s - np.max(s, axis=1, keepdims=True)
+        exp_s = np.exp(s)
+        sum_s = np.sum(exp_s, axis=1, keepdims=True)
+        p = exp_s / sum_s
+        loss = np.sum(- np.log(p[np.arange(N), y])) / N
 
-
-
-
-
-
-        pass
+        ind = np.zeros_like(p)
+        ind[np.arange(N), y] = 1
+        ds = p - ind
+        dW = x.T.dot(ds) / N
+        dW = dW + (2* reg* self.W)
         #############################################################################
         #                          END OF YOUR CODE                                 #
         #############################################################################
@@ -93,12 +99,14 @@ class Softmax (object):
             # Hint:                                                                 #
             # - Use np.random.choice                                                #
             #########################################################################
+            D = x.shape[0]
+            index = np.random.choice(D, batchSize)
+            xBatch = x[index]
+            yBatch = y[index]
+            loss, dW = self.calLoss(xBatch, yBatch, reg)
+            lossHistory.append(loss)
+            self.W = self.W - lr * dW
 
-
-
-
-
-            pass
             #########################################################################
             #                       END OF YOUR CODE                                #
             #########################################################################
@@ -124,10 +132,9 @@ class Softmax (object):
         # TODO: 5 points                                                          #
         # -  Store the predict output in yPred                                    #
         ###########################################################################
+        s = x.dot(self.W)
+        yPred = np.argmax(s, axis=1)
 
-
-
-        pass
         ###########################################################################
         #                           END OF YOUR CODE                              #
         ###########################################################################
@@ -141,9 +148,9 @@ class Softmax (object):
         # -  Calculate accuracy of the predict value and store to acc variable    #
         ###########################################################################
 
+        yPred = self.predict(x)
+        acc = np.mean(y == yPred)*100
 
-
-        pass
         ###########################################################################
         #                           END OF YOUR CODE                              #
         ###########################################################################

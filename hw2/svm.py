@@ -11,8 +11,8 @@ class Svm (object):
         # - Generate a random svm weight matrix to compute loss                 #
         #   with standard normal distribution and Standard deviation = 0.01.    #
         #########################################################################
-
-        pass
+        self.W = np.random.randn(inputDim, outputDim) * 0.01
+        
         #########################################################################
         #                       END OF YOUR CODE                                #
         #########################################################################
@@ -43,12 +43,19 @@ class Svm (object):
         # Bonus:                                                                    #
         # - +2 points if done without loop                                          #
         #############################################################################
+        N = x.shape[0]
+        s = x.dot(self.W)
+        sy = s[np.arange(N), y].reshape(-1, 1)
+        margin = s - sy + 1
+        margin[np.arange(N), y] = 0
+        loss = np.sum(margin) / N
 
+        ds = np.zeros_like(margin)
+        ds[margin > 0] = 1
+        ds[np.arange(N), y] = -np.sum(ds, axis=1)
+        dW = x.T.dot(ds) / N
+        dW = dW + 2 * reg * self.W
 
-
-
-
-        pass
         #############################################################################
         #                          END OF YOUR CODE                                 #
         #############################################################################
@@ -91,12 +98,14 @@ class Svm (object):
             # Hint:                                                                 #
             # - Use np.random.choice                                                #
             #########################################################################
+            D = x.shape[0]
+            index = np.random.choice(D, batchSize)
+            xBatch = x[index]
+            yBatch = y[index]
+            loss, dW = self.calLoss(xBatch, yBatch, reg)
+            lossHistory.append(loss)
+            self.W = self.W - lr * dW
 
-
-
-
-
-            pass
             #########################################################################
             #                       END OF YOUR CODE                                #
             #########################################################################
@@ -122,10 +131,9 @@ class Svm (object):
         # TODO: 5 points                                                          #
         # -  Store the predict output in yPred                                    #
         ###########################################################################
+        s = x.dot(self.W)
+        yPred = np.argmax(s, axis=1)
 
-
-
-        pass
         ###########################################################################
         #                           END OF YOUR CODE                              #
         ###########################################################################
@@ -138,10 +146,9 @@ class Svm (object):
         # TODO: 5 points                                                          #
         # -  Calculate accuracy of the predict value and store to acc variable    #
         ###########################################################################
+        yPred = self.predict(x)
+        acc = np.mean(y == yPred)*100
 
-
-
-        pass
         ###########################################################################
         #                           END OF YOUR CODE                              #
         ###########################################################################
