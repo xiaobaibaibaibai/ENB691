@@ -139,14 +139,13 @@ for lr in learningRate:
         classifier = Svm(xTrain.shape[1], numClasses)
         classifier.train(xTrain, yTrain, lr, reg, iter=1500 ,verbose=False)
         currentAcc = classifier.calAccuracy(xVal, yVal)
+        # compare accuracy and record best parameters
         if currentAcc > bestAcc:
             bestAcc = currentAcc
             bestModel = classifier
         bestParameters = [lr,reg]
 
 
-
-pass
 ################################################################################
 #                              END OF YOUR CODE                                #
 ################################################################################
@@ -232,13 +231,12 @@ for lr in learningRate:
         classifier = Softmax(xTrain.shape[1], numClasses)
         classifier.train(xTrain, yTrain, lr, reg, iter=1500 ,verbose=False)
         currentAcc = classifier.calAccuracy(xVal, yVal)
+        # compare accuracy and record best parameters
         if currentAcc > bestAcc:
             bestAcc = currentAcc
             bestModel = classifier
         bestParameters = [lr,reg]
 
-
-pass
 ################################################################################
 #                              END OF YOUR CODE                                #
 ################################################################################

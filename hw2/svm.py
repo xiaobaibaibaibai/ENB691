@@ -43,16 +43,20 @@ class Svm (object):
         # Bonus:                                                                    #
         # - +2 points if done without loop                                          #
         #############################################################################
+        #calculate sy
         N = x.shape[0]
         s = x.dot(self.W)
         sy = s[np.arange(N), y].reshape(-1, 1)
+        #calculate margin
         margin = s - sy + 1
         margin[np.arange(N), y] = 0
+        #calculate loss
         loss = np.sum(margin) / N
-
+        #calculate dsy
         ds = np.zeros_like(margin)
         ds[margin > 0] = 1
         ds[np.arange(N), y] = -np.sum(ds, axis=1)
+        #calculate dW
         dW = x.T.dot(ds) / N
         dW = dW + 2 * reg * self.W
 
@@ -103,6 +107,7 @@ class Svm (object):
             xBatch = x[index]
             yBatch = y[index]
             loss, dW = self.calLoss(xBatch, yBatch, reg)
+            #save loss and update weights
             lossHistory.append(loss)
             self.W = self.W - lr * dW
 
@@ -132,6 +137,7 @@ class Svm (object):
         # -  Store the predict output in yPred                                    #
         ###########################################################################
         s = x.dot(self.W)
+        # find most possible one 
         yPred = np.argmax(s, axis=1)
 
         ###########################################################################
@@ -147,7 +153,8 @@ class Svm (object):
         # -  Calculate accuracy of the predict value and store to acc variable    #
         ###########################################################################
         yPred = self.predict(x)
-        acc = np.mean(y == yPred)*100
+        comp = yPred == y
+        acc = len(comp[comp == True]) / comp.size * 100
 
         ###########################################################################
         #                           END OF YOUR CODE                              #

@@ -46,15 +46,20 @@ class Softmax (object):
         #############################################################################
         N = x.shape[0]
         s = x.dot(self.W)
+        # avoid overflow
         s = s - np.max(s, axis=1, keepdims=True)
         exp_s = np.exp(s)
         sum_s = np.sum(exp_s, axis=1, keepdims=True)
+        # probability of each class
         p = exp_s / sum_s
+        #calculate loss
         loss = np.sum(- np.log(p[np.arange(N), y])) / N
 
+        # ind is (N * K)
         ind = np.zeros_like(p)
         ind[np.arange(N), y] = 1
         ds = p - ind
+        #calculate dW
         dW = x.T.dot(ds) / N
         dW = dW + (2* reg* self.W)
         #############################################################################
@@ -103,6 +108,7 @@ class Softmax (object):
             index = np.random.choice(D, batchSize)
             xBatch = x[index]
             yBatch = y[index]
+            #save loss and update weights
             loss, dW = self.calLoss(xBatch, yBatch, reg)
             lossHistory.append(loss)
             self.W = self.W - lr * dW
@@ -133,6 +139,7 @@ class Softmax (object):
         # -  Store the predict output in yPred                                    #
         ###########################################################################
         s = x.dot(self.W)
+        # find most possible one 
         yPred = np.argmax(s, axis=1)
 
         ###########################################################################
@@ -147,9 +154,9 @@ class Softmax (object):
         # TODO: 5 points                                                          #
         # -  Calculate accuracy of the predict value and store to acc variable    #
         ###########################################################################
-
         yPred = self.predict(x)
-        acc = np.mean(y == yPred)*100
+        comp = yPred == y
+        acc = len(comp[comp == True]) / comp.size * 100
 
         ###########################################################################
         #                           END OF YOUR CODE                              #
