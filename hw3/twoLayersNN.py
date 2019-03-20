@@ -71,8 +71,8 @@ class TwoLayersNN (object):
         # calculate scores
         w_b = np.vstack((self.params['w2'], self.params['b2']))
         sc = Hout_b.dot(w_b)
-        s = np.maximum(sc*0.01, sc)
-        s = s - np.max(s, axis=1, keepdims=True)
+        sr = np.maximum(sc*0.01, sc)
+        s = sr - np.max(sr, axis=1, keepdims=True)
         # caclulate correction probability
         exp_s = np.exp(s)
         sum_x = np.sum(exp_s, axis=1, keepdims=True)
