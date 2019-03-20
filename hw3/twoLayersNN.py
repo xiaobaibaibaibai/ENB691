@@ -95,7 +95,7 @@ class TwoLayersNN (object):
         dHout = ds.dot(self.params['w2'].T)
         # dHin = dHout * (dHout >= 0)
         # dHin = dHin + dHout * (dHout < 0) * 0.01
-        dHin = (dHout >= 0) * dHout + (dHout < 0) * dHout * 0.01
+        dHin = (Hout >= 0) * dHout + (Hout < 0) * dHout * 0.01
         # calculate derivatives for w2 and b2 
         grads['w1'] = x.T.dot(dHin) / x.shape[0] + reg * self.params['w1']
         grads['b1'] = np.sum(dHin, axis=0) / x.shape[0]
