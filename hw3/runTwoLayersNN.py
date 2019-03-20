@@ -132,7 +132,7 @@ bestModel = None
 # - Store the best accuracy in bestAcc                                         #
 # - Best Model should get validation accuracy above 35%                        #
 ################################################################################
-'''
+
 learningRate = [6e-3, 7e-3, 9e-3]
 regularizationStrength = [6e-3, 7e-3, 9e-3]
 
@@ -146,7 +146,7 @@ for lr in learningRate:
             bestAcc = currentAcc
             bestModel = classifier
         bestParameters = [lr,reg]
-'''
+
 ################################################################################
 #                              END OF YOUR CODE                                #
 ################################################################################
