@@ -133,8 +133,8 @@ bestModel = None
 # - Best Model should get validation accuracy above 35%                        #
 ################################################################################
 
-learningRate = [8e-3]
-regularizationStrength = [8e-3]
+learningRate = [7e-3,8e-3]
+regularizationStrength = [7e-3,8e-3]
 
 for lr in learningRate:
     for reg in regularizationStrength:
