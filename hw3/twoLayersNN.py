@@ -66,11 +66,13 @@ class TwoLayersNN (object):
         u_b = np.vstack((self.params['w1'], self.params['b1']))
         Hin = x_b.dot(u_b)
         # calculate Hout with bias by RELU
-        Hout = np.maximum(0, Hin)
+        Hout = np.maximum(Hin*0.01, Hin)
         Hout_b = np.append(Hout, np.ones([Hout.shape[0], 1]), axis=1)
         # calculate scores
         w_b = np.vstack((self.params['w2'], self.params['b2']))
-        s = Hout_b.dot(w_b)
+        sc = Hout_b.dot(w_b)
+        s = np.maximum(sc*0.01, sc)
+        s = s - np.max(s, axis=1, keepdims=True)
         # caclulate correction probability
         exp_s = np.exp(s)
         sum_x = np.sum(exp_s, axis=1, keepdims=True)
