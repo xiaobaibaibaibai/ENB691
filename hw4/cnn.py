@@ -112,6 +112,7 @@ print("\n################ Simple Model #########################")
 train(simpleModel(), xTrain, yTrain, xVal, yVal, xTest, yTest)
 
 # Complex Model
+'''
 tf.reset_default_graph()
 with tf.device(deviceType):
     x = tf.placeholder(tf.float32, [None, 32, 32, 3])
@@ -166,4 +167,4 @@ def complexModel():
 print("\n################ Complex Model #########################")
 train(complexModel(), xTrain, yTrain, xVal, yVal, xTest, yTest)
 
-
+'''
