@@ -130,8 +130,8 @@ def complexModel():
         # - Store last layer output in yOut                                         #
         #############################################################################
 
-        Wconv1 = tf.get_variable("Wconv1", shape=[7, 7, 3, 64])
-        bConv = tf.get_variable("bConv", shape=[64])
+        Wconv1 = tf.get_variable("Wconv1", shape=[7, 7, 3, 32])
+        bConv = tf.get_variable("bConv", shape=[32])
        
         # Define Convolutional Neural Network
         # 7x7 Convolution with stride = 2,  ((32-7)/2)+1 = 13
@@ -139,12 +139,12 @@ def complexModel():
         # Relu Activation
         h = tf.nn.relu(a)
         # do 2x2 Max Pooling for pooling layer
-        hPooling = tf.nn.max_pool(h, [1, 2, 2, 1], [1, 2, 2, 1], padding='VALID')
+        hPooling = tf.nn.max_pool(value=h, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='VALID')
         # ((13-2)/2)+1 = 6
-        hFlat = tf.reshape(hPooling, [-1, 6*6*64])
+        hFlat = tf.reshape(hPooling, [-1, 6*6*32])
 
         # the first layer. Fully connected layer with 1024 hidden neurons   
-        W1 = tf.get_variable("W1", shape=[6*6*64, 1024])
+        W1 = tf.get_variable("W1", shape=[6*6*32, 1024])
         B1 = tf.get_variable("B1", shape=[1024])
         Hin = tf.matmul(hFlat, W1) + B1
         # Relu Activation
