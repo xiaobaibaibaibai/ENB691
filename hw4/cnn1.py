@@ -39,7 +39,7 @@ deviceType = "/cpu:0"
 tfConfig = tf.ConfigProto(intra_op_parallelism_threads=10, inter_op_parallelism_threads=2, allow_soft_placement=True, device_count = {'CPU': 10})
 tfConfig.gpu_options.allow_growth = True        
 
-def train(Model, xT, yT, xV, yV, xTe, yTe, batchSize=1000, epochs=1, printEvery=10):
+def train(Model, xT, yT, xV, yV, xTe, yTe, batchSize=1000, epochs=50, printEvery=10):
     # Train Model
     trainIndex = np.arange(xTrain.shape[0])
     np.random.shuffle(trainIndex)
