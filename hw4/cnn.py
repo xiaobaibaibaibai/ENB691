@@ -3,7 +3,7 @@ import time
 import math
 import numpy as np
 import tensorflow as tf
-import ngraph_bridge
+# import ngraph_bridge
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 # Load the CIFAR10 dataset
