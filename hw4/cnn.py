@@ -39,6 +39,7 @@ deviceType = "/cpu:0"
 tfConfig = tf.ConfigProto(intra_op_parallelism_threads=10, inter_op_parallelism_threads=2, allow_soft_placement=True, device_count = {'CPU': 10})
 tfConfig.gpu_options.allow_growth = True        
 
+'''
 # Simple Model
 tf.reset_default_graph()
 with tf.device(deviceType):
@@ -53,9 +54,13 @@ def simpleModel():
 
         # Define Convolutional Neural Network
         a = tf.nn.conv2d(x, wConv, strides=[1, 2, 2, 1], padding='VALID') + bConv # Stride [batch, height, width, channels]
+        print("a shape is {0}".format(a.shape))
         h = tf.nn.relu(a)
+        print("h shape is {0}".format(h.shape))
         hFlat = tf.reshape(h, [-1, 5408]) # Flat the output to be size 5408 each row
+        print("hFlat shape is {0}".format(hFlat.shape))
         yOut = tf.matmul(hFlat, w) + b
+        print("yOut shape is {0}".format(yOut.shape))
 
         # Define Loss
         totalLoss = tf.losses.hinge_loss(tf.one_hot(y, 10), logits=yOut)
@@ -70,6 +75,7 @@ def simpleModel():
         accuracy = tf.reduce_mean(tf.cast(correctPrediction, tf.float32))
 
         return [meanLoss, accuracy, trainStep]
+'''
 
 def train(Model, xT, yT, xV, yV, xTe, yTe, batchSize=1000, epochs=100, printEvery=10):
     # Train Model
@@ -108,11 +114,11 @@ def train(Model, xT, yT, xV, yV, xTe, yTe, batchSize=1000, epochs=100, printEver
         print('Time = {0:.4f} seconds.'.format(time.time()-st))
 
 # Start training simple model
-print("\n################ Simple Model #########################")
-train(simpleModel(), xTrain, yTrain, xVal, yVal, xTest, yTest)
+# print("\n################ Simple Model #########################")
+# train(simpleModel(), xTrain, yTrain, xVal, yVal, xTest, yTest)
 
 # Complex Model
-'''
+
 tf.reset_default_graph()
 with tf.device(deviceType):
     x = tf.placeholder(tf.float32, [None, 32, 32, 3])
@@ -131,27 +137,48 @@ def complexModel():
         # - Store last layer output in yOut                                         #
         #############################################################################
 
+         #       7x7 Convolution with stride = 2
+        wConv = tf.get_variable("wConv", shape=[7, 7, 3, 64])
+        bConv = tf.get_variable("bConv", shape=[64])
+
+        # Define Convolutional Neural Network
+        a = tf.nn.conv2d(x, wConv, strides=[1,2,2,1], padding='VALID') + bConv # Stride [batch, height, width, channels]
+        #       Relu Activation
+        h = tf.nn.relu(a)
+        #       2x2 Max Pooling
+        max_pool_output = tf.nn.max_pool(value=h, ksize=[1,2,2,1], strides=[1,2,2,1],padding='VALID')
+        hFlat = tf.reshape(max_pool_output, [-1, 6*6*64]) # Flat the output to be size 6*6*64 each row
+
+        #       Fully connected layer with 1024 hidden neurons
+        w_fully_h = tf.get_variable("w_fully_h", shape=[6*6*64, 1024])
+        b_fully_h = tf.get_variable("b_fully_h", shape=[1024])
+
+        fully_connected_output = tf.matmul(hFlat, w_fully_h) + b_fully_h
+        #       Relu Activation
+        relu_out =  tf.nn.relu(fully_connected_output)
+        relu_outFlat = tf.reshape(relu_out, [-1, 1024]) # Flat the output to be size 1024 each row
+        
+        #       Fully connected layer to map to 128 outputs
+        w1 = tf.get_variable("w1", shape=[1024,128])
+        b1 = tf.get_variable("b1", shape=[128])
        
+        fully_connected_output = tf.matmul(relu_outFlat, w1) + b1
+        relu_out =  tf.nn.relu(fully_connected_output)
+        relu_outFlat = tf.reshape(relu_out, [-1, 128]) # Flat the output to be size 128 each row
+        relu_outFlat = tf.nn.dropout(relu_outFlat, 0.5) #To avoid overfitting
+        #       Fully connected layer to map to 10 outputs
+        w2 = tf.get_variable("w2", shape=[128,10])
+        b2 = tf.get_variable("b2", shape=[10])
+        # - Store last layer output in yOut
+        yOut = tf.matmul(relu_outFlat, w2) + b2
 
-
-
-
-
-
-
-
-
-
-
-
-       
         #########################################################################
         #                       END OF YOUR CODE                                #
         #########################################################################
 
         # Define Loss
         totalLoss = tf.losses.hinge_loss(tf.one_hot(y, 10), logits=yOut)
-        meanLoss = tf.reduce_mean(totalLoss) + 5e4*tf.nn.l2_loss(Wconv1) + 5e4*tf.nn.l2_loss(W1) + 5e4*tf.nn.l2_loss(W2)
+        meanLoss = tf.reduce_mean(totalLoss) + 5e4*tf.nn.l2_loss(wConv) + 5e4*tf.nn.l2_loss(w1) + 5e4*tf.nn.l2_loss(w2)
 
         # Define Optimizer
         optimizer = tf.train.AdamOptimizer(5e-4)
@@ -166,5 +193,3 @@ def complexModel():
 # Start training complex model
 print("\n################ Complex Model #########################")
 train(complexModel(), xTrain, yTrain, xVal, yVal, xTest, yTest)
-
-'''
