@@ -42,7 +42,7 @@ tfConfig.gpu_options.allow_growth = True
 # Simple Model
 tf.reset_default_graph()
 with tf.device(deviceType):
-    x = tf.placeholder(tf.float32, [None, 32, 32, 3])
+    x = tf.placeholder(tf.float32, [None, 32, 32, 3]) # input size
     y = tf.placeholder(tf.int64, [None])
 def simpleModel():
     with tf.device(deviceType):
