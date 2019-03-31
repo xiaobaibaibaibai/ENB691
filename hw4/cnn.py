@@ -77,7 +77,7 @@ def simpleModel():
         return [meanLoss, accuracy, trainStep]
 '''
 
-def train(Model, xT, yT, xV, yV, xTe, yTe, batchSize=1000, epochs=100, printEvery=10):
+def train(Model, xT, yT, xV, yV, xTe, yTe, batchSize=1000, epochs=30, printEvery=10):
     # Train Model
     trainIndex = np.arange(xTrain.shape[0])
     np.random.shuffle(trainIndex)
@@ -147,10 +147,10 @@ def complexModel():
         h = tf.nn.relu(a)
         #       2x2 Max Pooling
         max_pool_output = tf.nn.max_pool(value=h, ksize=[1,2,2,1], strides=[1,2,2,1],padding='VALID')
-        hFlat = tf.reshape(max_pool_output, [-1, 6*6*64]) # Flat the output to be size 6*6*64 each row
+        hFlat = tf.reshape(max_pool_output, [-1, 4*4*64]) # Flat the output to be size 6*6*64 each row
 
         #       Fully connected layer with 1024 hidden neurons
-        w_fully_h = tf.get_variable("w_fully_h", shape=[6*6*64, 1024])
+        w_fully_h = tf.get_variable("w_fully_h", shape=[4*4*64, 1024])
         b_fully_h = tf.get_variable("b_fully_h", shape=[1024])
 
         fully_connected_output = tf.matmul(hFlat, w_fully_h) + b_fully_h
