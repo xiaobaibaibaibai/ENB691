@@ -1,0 +1,101 @@
+############### TensorFlow + nGraph ################
+
+
+--------------------------------------------
+-----------intra is 8, inter is 2-----------
+--------------------------------------------
+
+################ Simple Model #########################
+Iteration 0: loss = 2.066 and training accuracy = 20.53%, Validate loss = 1.060 and validate accuracy = 26.50%
+Iteration 10: loss = 0.285 and training accuracy = 49.59%, Validate loss = 0.315 and validate accuracy = 46.80%
+Iteration 20: loss = 0.214 and training accuracy = 59.13%, Validate loss = 0.265 and validate accuracy = 50.80%
+Iteration 30: loss = 0.181 and training accuracy = 66.02%, Validate loss = 0.247 and validate accuracy = 53.60%
+Iteration 40: loss = 0.165 and training accuracy = 69.32%, Validate loss = 0.238 and validate accuracy = 55.70%
+Iteration 50: loss = 0.151 and training accuracy = 72.45%, Validate loss = 0.237 and validate accuracy = 56.10%
+Iteration 60: loss = 0.145 and training accuracy = 73.85%, Validate loss = 0.237 and validate accuracy = 54.90%
+Iteration 70: loss = 0.139 and training accuracy = 75.54%, Validate loss = 0.252 and validate accuracy = 56.50%
+Iteration 80: loss = 0.136 and training accuracy = 76.34%, Validate loss = 0.251 and validate accuracy = 55.00%
+Iteration 90: loss = 0.139 and training accuracy = 76.01%, Validate loss = 0.259 and validate accuracy = 55.70%
+Testing loss = 0.268 and testing accuracy = 54.26%
+Time = 952.4436 seconds.
+
+################ Complex Model #########################
+Iteration 0: loss = 2.406 and training accuracy = 20.36%, Validate loss = 0.762 and validate accuracy = 21.20%
+Iteration 10: loss = 0.454 and training accuracy = 37.21%, Validate loss = 0.456 and validate accuracy = 32.80%
+Iteration 20: loss = 0.395 and training accuracy = 42.13%, Validate loss = 0.401 and validate accuracy = 36.20%
+Iteration 30: loss = 0.348 and training accuracy = 44.72%, Validate loss = 0.355 and validate accuracy = 35.70%
+Iteration 40: loss = 0.310 and training accuracy = 46.37%, Validate loss = 0.319 and validate accuracy = 36.10%
+Iteration 50: loss = 0.280 and training accuracy = 47.04%, Validate loss = 0.291 and validate accuracy = 33.60%
+Iteration 60: loss = 0.257 and training accuracy = 46.59%, Validate loss = 0.268 and validate accuracy = 32.70%
+Iteration 70: loss = 0.240 and training accuracy = 44.90%, Validate loss = 0.251 and validate accuracy = 30.30%
+Iteration 80: loss = 0.226 and training accuracy = 45.20%, Validate loss = 0.239 and validate accuracy = 31.10%
+Iteration 90: loss = 0.217 and training accuracy = 43.52%, Validate loss = 0.230 and validate accuracy = 24.70%
+Testing loss = 0.222 and testing accuracy = 27.17%
+Time = 1463.9720 seconds.
+
+
+--------------------------------------------
+-----------intra is 8, inter is 8-----------
+--------------------------------------------
+
+################ Simple Model #########################
+Iteration 0: loss = 1.862 and training accuracy = 20.57%, Validate loss = 0.990 and validate accuracy = 24.80%
+Iteration 10: loss = 0.280 and training accuracy = 49.46%, Validate loss = 0.321 and validate accuracy = 42.70%
+Iteration 20: loss = 0.206 and training accuracy = 60.52%, Validate loss = 0.258 and validate accuracy = 49.70%
+Iteration 30: loss = 0.175 and training accuracy = 66.89%, Validate loss = 0.237 and validate accuracy = 52.80%
+Iteration 40: loss = 0.165 and training accuracy = 69.16%, Validate loss = 0.238 and validate accuracy = 54.40%
+Iteration 50: loss = 0.151 and training accuracy = 72.07%, Validate loss = 0.243 and validate accuracy = 55.70%
+Iteration 60: loss = 0.145 and training accuracy = 73.90%, Validate loss = 0.239 and validate accuracy = 56.50%
+Iteration 70: loss = 0.142 and training accuracy = 74.90%, Validate loss = 0.247 and validate accuracy = 56.20%
+Iteration 80: loss = 0.140 and training accuracy = 75.30%, Validate loss = 0.248 and validate accuracy = 56.00%
+Iteration 90: loss = 0.136 and training accuracy = 76.76%, Validate loss = 0.246 and validate accuracy = 55.80%
+Testing loss = 0.264 and testing accuracy = 54.60%
+Time = 918.9758 seconds.
+
+################ Complex Model #########################
+Iteration 0: loss = 2.178 and training accuracy = 18.62%, Validate loss = 0.798 and validate accuracy = 20.20%
+Iteration 10: loss = 0.454 and training accuracy = 34.79%, Validate loss = 0.454 and validate accuracy = 33.10%
+Iteration 20: loss = 0.391 and training accuracy = 40.84%, Validate loss = 0.395 and validate accuracy = 35.90%
+Iteration 30: loss = 0.340 and training accuracy = 43.80%, Validate loss = 0.346 and validate accuracy = 37.70%
+Iteration 40: loss = 0.301 and training accuracy = 44.54%, Validate loss = 0.309 and validate accuracy = 35.10%
+Iteration 50: loss = 0.270 and training accuracy = 44.76%, Validate loss = 0.280 and validate accuracy = 30.20%
+Iteration 60: loss = 0.246 and training accuracy = 44.32%, Validate loss = 0.257 and validate accuracy = 30.50%
+Iteration 70: loss = 0.229 and training accuracy = 44.07%, Validate loss = 0.239 and validate accuracy = 28.50%
+Iteration 80: loss = 0.218 and training accuracy = 41.15%, Validate loss = 0.229 and validate accuracy = 26.80%
+Iteration 90: loss = 0.210 and training accuracy = 40.54%, Validate loss = 0.221 and validate accuracy = 22.60%
+Testing loss = 0.216 and testing accuracy = 23.29%
+Time = 1457.8220 seconds.
+
+
+
+--------------------------------------------
+-----------intra is 8, inter is 16-----------
+--------------------------------------------
+
+################ Simple Model #########################
+Iteration 0: loss = 2.570 and training accuracy = 19.30%, Validate loss = 1.210 and validate accuracy = 26.00%
+Iteration 10: loss = 0.309 and training accuracy = 46.45%, Validate loss = 0.330 and validate accuracy = 41.60%
+Iteration 20: loss = 0.223 and training accuracy = 57.30%, Validate loss = 0.269 and validate accuracy = 48.90%
+Iteration 30: loss = 0.192 and training accuracy = 63.31%, Validate loss = 0.244 and validate accuracy = 52.70%
+Iteration 40: loss = 0.168 and training accuracy = 68.40%, Validate loss = 0.235 and validate accuracy = 53.50%
+Iteration 50: loss = 0.161 and training accuracy = 70.09%, Validate loss = 0.231 and validate accuracy = 55.90%
+Iteration 60: loss = 0.152 and training accuracy = 72.31%, Validate loss = 0.228 and validate accuracy = 57.90%
+Iteration 70: loss = 0.142 and training accuracy = 74.20%, Validate loss = 0.232 and validate accuracy = 55.50%
+Iteration 80: loss = 0.143 and training accuracy = 74.76%, Validate loss = 0.244 and validate accuracy = 55.10%
+Iteration 90: loss = 0.145 and training accuracy = 74.38%, Validate loss = 0.248 and validate accuracy = 55.40%
+Testing loss = 0.252 and testing accuracy = 55.42%
+Time = 937.5715 seconds.
+
+################ Complex Model #########################
+Iteration 0: loss = 2.295 and training accuracy = 19.58%, Validate loss = 0.776 and validate accuracy = 20.80%
+Iteration 10: loss = 0.452 and training accuracy = 38.51%, Validate loss = 0.453 and validate accuracy = 36.80%
+Iteration 20: loss = 0.394 and training accuracy = 43.17%, Validate loss = 0.399 and validate accuracy = 39.00%
+Iteration 30: loss = 0.345 and training accuracy = 45.79%, Validate loss = 0.350 and validate accuracy = 38.40%
+Iteration 40: loss = 0.307 and training accuracy = 46.66%, Validate loss = 0.313 and validate accuracy = 36.10%
+Iteration 50: loss = 0.276 and training accuracy = 46.56%, Validate loss = 0.284 and validate accuracy = 33.90%
+Iteration 60: loss = 0.252 and training accuracy = 46.21%, Validate loss = 0.262 and validate accuracy = 31.50%
+Iteration 70: loss = 0.234 and training accuracy = 45.48%, Validate loss = 0.244 and validate accuracy = 29.50%
+Iteration 80: loss = 0.221 and training accuracy = 43.62%, Validate loss = 0.232 and validate accuracy = 29.60%
+Iteration 90: loss = 0.213 and training accuracy = 41.63%, Validate loss = 0.223 and validate accuracy = 28.90%
+Testing loss = 0.217 and testing accuracy = 26.93%
+Time = 1473.5104 seconds.
