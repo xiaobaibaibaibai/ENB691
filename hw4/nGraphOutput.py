@@ -45,9 +45,9 @@ def groupTrain():
         tfConfig = tf.ConfigProto(intra_op_parallelism_threads=i, inter_op_parallelism_threads=2, allow_soft_placement=True, device_count = {'CPU': 10})
         tfConfig.gpu_options.allow_growth = True
 
-        print("\n\n--------------------------------------------".format(i, 2))
+        print("\n\n--------------------------------------------")
         print("-----------intra is {0}, inter is {1}-----------".format(i, 2))
-        print("--------------------------------------------".format(i, 2))
+        print("--------------------------------------------")
 
         # Simple Model
         tf.reset_default_graph()
