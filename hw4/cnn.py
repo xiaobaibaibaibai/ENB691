@@ -3,7 +3,7 @@ import time
 import math
 import numpy as np
 import tensorflow as tf
-# import ngraph_bridge
+import ngraph_bridge
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 # Load the CIFAR10 dataset
@@ -108,8 +108,8 @@ def train(Model, xT, yT, xV, yV, xTe, yTe, batchSize=1000, epochs=100, printEver
         print('Time = {0:.4f} seconds.'.format(time.time()-st))
 
 # Start training simple model
-# print("\n################ Simple Model #########################")
-# train(simpleModel(), xTrain, yTrain, xVal, yVal, xTest, yTest)
+print("\n################ Simple Model #########################")
+train(simpleModel(), xTrain, yTrain, xVal, yVal, xTest, yTest)
 
 # Complex Model
 tf.reset_default_graph()
@@ -175,6 +175,8 @@ def complexModel():
 
 # Start training complex model
 print("\n################ Complex Model #########################")
+# intra_op_parallelism_threads=5, inter_op_parallelism_threads=1
+print("intra is {0}, inter is {1}".format(5, 2))
 train(complexModel(), xTrain, yTrain, xVal, yVal, xTest, yTest)
 
 
