@@ -39,14 +39,14 @@ xTest -= meanImage
 
 def groupTrain():
     print("\n############### TensorFlow + nGraph ################")
-    for i in [8, 32, 64]:
+    for i in [2, 8, 16]:
         # Select device
         deviceType = "/cpu:0"  
-        tfConfig = tf.ConfigProto(intra_op_parallelism_threads=i, inter_op_parallelism_threads=2, allow_soft_placement=True, device_count = {'CPU': 10})
+        tfConfig = tf.ConfigProto(intra_op_parallelism_threads=8, inter_op_parallelism_threads=i, allow_soft_placement=True, device_count = {'CPU': 10})
         tfConfig.gpu_options.allow_growth = True
 
         print("\n\n--------------------------------------------")
-        print("-----------intra is {0}, inter is {1}-----------".format(i, 2))
+        print("-----------intra is {0}, inter is {1}-----------".format(8, i))
         print("--------------------------------------------")
 
         # Simple Model
